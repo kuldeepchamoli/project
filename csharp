@@ -1,0 +1,75 @@
+#question 1  Print triangle - and allow user to set height of it in. Like in the following case it’s 4
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the height of the triangle: ");
+        int height = Convert.ToInt32(Console.ReadLine());
+
+        PrintTriangle(height);
+
+        Console.ReadLine();
+    }
+
+    static void PrintTriangle(int height)
+    {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < height - i - 1; j++)
+            {
+                Console.Write(" ");
+            }
+
+            for (int j = 0; j < 2 * i + 1; j++)
+            {
+                Console.Write("*");
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
+
+
+#question 2. Find valid date (MMDDYYYY) from string.
+#For example :-
+#Hdjsh asd2324234jghjsd hjsdg sdhk 12212021 idf32432 32423 d34234jh dfh
+
+using System;
+using System.Text.RegularExpressions;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string input = Console.ReadLine();
+        
+        var dateMatches = FindValidDates(input);
+        
+        Console.WriteLine("Valid dates found in the string:");
+        
+        foreach (var date in dateMatches)
+        {
+            Console.WriteLine(date);
+        }
+
+        Console.ReadLine();
+    }
+
+    static MatchCollection FindValidDates(string input)
+    {
+        // Define the pattern to match MMDDYYYY format
+        string pattern = @"\b(0[1-9]|1[0-2])(0[1-9]|1\d|2[0-8]|3[01])(19|20)\d{2}\b";
+
+        // Create a regex object with the pattern
+        Regex regex = new Regex(pattern);
+
+        // Use the Matches method to find all matches in the input string
+        MatchCollection matches = regex.Matches(input);
+
+        return matches;
+    }
+}
+
